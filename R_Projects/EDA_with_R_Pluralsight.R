@@ -151,3 +151,196 @@ summary(movies)
 
 head(movies)
 head(genres)
+tail(movies)
+
+#Univariate Visualizations for qualitative variables
+
+#bar graph of rating observations
+plot(movies$Rating)    ###this is the section of code I cannot get to work
+
+#create a pie chart of rating observations
+pie(table(movies$Rating))
+
+#univariate visualizations for quantitative variables
+
+#create a dot plot of runtime
+plot(
+  x = movies$Runtime,
+  y = rep(0, nrow(movies)), #set all y to 0 so all values on a line
+  ylab = "",
+  yaxt = "n")     #turns off axis labels and tick marks
+
+#create a box plot of the same data
+boxplot(
+  x = movies$Runtime,
+  xlab = "Runtime (minutes)",
+  horizontal = TRUE)
+
+#Create a histogram of runtimes
+hist(movies$Runtime)
+hist(
+  x = movies$Runtime,
+  breaks = 10) #change number of bins
+hist(
+  x = movies$Runtime,
+  breaks = 30)
+
+#create density plot
+plot(density(movies$Runtime))
+
+#add the dot plot to this graph
+points(                 #adds points of interest to graph
+  x = movies$Runtime,
+  y = rep(-0.0005, nrow(movies))
+)
+
+#bivariate visualizations for qualitative variables
+
+#Create a spine plot of genre and rating
+#this does not work for me
+spineplot(
+  x = factor(genres$Genre),
+  y = factor(genres$Rating))
+
+#create a mosaic plot of genre and rating
+mosaicplot(
+  x = table(
+    genres$Genre,
+    genres$Rating),
+  las = 3)
+
+#Bivariate visualizations for quantitative variables
+
+#create scatter plot of runtime and box office
+plot(
+  x = movies$Runtime,
+  y = movies$Box.Office)
+
+#create scatter plot of critic score and box office
+plot(
+  x = movies$Critic.Score,
+  y = movies$Box.Office)
+#neither seem to have a very strong correlation
+
+#plot a line graph of count of movies by year
+plot(
+  #set x = the frequency table of movies by year
+  x = table(movies$Year),
+  type = "l")
+#sharp drop off is bc some arent included in the data set
+
+#bivariate viz for one qualitative and one quantitative variable
+
+#create a bar graph of average box office by rating
+barplot(tapply(movies$Box.Office, movies$Rating, mean))
+
+#create a bar graph of avg box office by genre
+barplot(
+  height = tapply(genres$Box.Office, genres$Genre, mean),
+  las = 3)
+
+#plot bivariate box plots of box office by rating
+plot(
+  x = factor(movies$Rating),
+  y = factor(movies$Box.Office))
+#should see multiple box and whiskers plot but this one also does not work
+
+#summarizing and entire table
+
+#create a scatterplot matrix
+plot(movies)
+
+#cleaning up data visualizations
+#create bar chart with defaults
+plot(factor(movies$Rating))
+
+#clean up the bar chart
+plot(
+  x = factor(movies$Rating),
+  main = "Count of Movies by Rating",
+  xlab = "Rating Category",
+  ylab = "Count of Movies",
+  col = "#b3cde3")
+
+###############################
+###### BEYOND R AND EDA #######
+###############################
+
+#Linear Regression Analysis
+data(iris)
+head(iris)
+
+#look at unique species
+unique(iris$Species)
+
+#create scatterplot matrix
+plot(iris[1:4])
+
+plot(
+  x = iris$Petal.Length,
+  y = iris$Petal.Width)
+
+#create linear regression model
+x <- iris$Petal.Length
+y <- iris$Petal.Width
+model <- lm(y ~ x)
+#draw linear regression on plot
+lines(
+  x = iris$Petal.Length,
+  y = model$fitted,
+  col = "red",
+  lwd = 3)
+#get correlation coefficients
+cor(
+  x = iris$Petal.Length,
+  y = iris$Petal.Width)
+#coefficient is very high
+#summarize the model
+summary(model)
+
+#predict new unknown values from model
+predict(
+  object = model,
+  newdata = data.frame(x = c(2, 5, 7))
+)
+#name of the predictor variable here (x) must be the same as in model formula
+
+### ML - Cluster Analysis - K-means ###
+
+#create scatter plot with species differentiated by color
+plot(
+  x = iris[1:4],
+  col = as.integer(iris$Species))
+
+#view scatterplot of petal length vs width
+plot(
+  x = iris$Petal.Length,
+  y = iris$Petal.Width,
+  col = as.numeric(iris$Species)
+)
+#create k-means clusters
+clusters <- kmeans(
+  x = iris[, 1:4],
+  centers = 3,     #number of clusters is already known here
+  nstart = 10)     #restarts 10 times
+
+#plot each cluster as a shape
+plot(
+  x = iris$Petal.Length,
+  y = iris$Petal.Width,
+  col = as.numeric(iris$Species),
+  pch = clusters$cluster      #this plots a dif shape for the predicted values
+)
+#plot the centroids
+points(
+  x = clusters$centers[, "Petal.Length"],
+  y = clusters$centers[, "Petal.Width"],
+  pch = 4,
+  lwd = 4,
+  col = "blue"
+)
+#view a table of the clusters
+table(
+  x = clusters$cluster,
+  y = iris$Species
+)
