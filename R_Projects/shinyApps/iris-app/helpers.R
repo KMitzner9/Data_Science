@@ -1,4 +1,4 @@
-iris <- read.csv("Iris.csv")
+iris <- read.csv("data/Iris.csv")
 data(iris)
 head(iris)
 ?data
