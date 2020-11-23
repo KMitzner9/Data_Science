@@ -15,6 +15,7 @@ head(setosa)
 versicolor <- iris[iris$Species == "versicolor",]
 head(versicolor)
 virginica <- iris[iris$Species == "virginica", ]
+head(virginica)
 
 ### SETOSA ###
 #create some scatter plots to view sepal length vs width and petal LxW
@@ -24,7 +25,7 @@ plot(
   main = "Setosa: Sepal Length vs Sepal Width",
   xlab = "Sepal Length",
   ylab = "Sepal Width")
-
+?plot
 #draw regression line
 model <- lm(setosa$Sepal.Width ~ setosa$Sepal.Length)
 lines(
@@ -36,8 +37,8 @@ lines(
 #petal length vs width
 #create some scatter plots to view sepal length vs width and petal LxW
 plot(
-  x = setosa$Petal.Length,
-  y = setosa$Petal.Width,
+  x = iris[iris$Species == "setosa",]$Petal.Length,
+  y = iris[iris$Species == "setosa",]$Petal.Width,
   main = "Setosa: Petal Length vs Petal Width",
   xlab = "Petal Length",
   ylab = "Petal Width")
@@ -49,3 +50,9 @@ lines(
   y = model$fitted,
   col = "red",
   lwd = 3)
+
+plot(
+  x = species$feature[1],
+  y = species$feature[2],
+  xlab = xlab,
+  ylab = ylab)
