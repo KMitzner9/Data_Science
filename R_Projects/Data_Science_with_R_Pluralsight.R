@@ -38,7 +38,7 @@ m <- matrix(
   data = 1:6,
   nrow = 2,
   ncol = 3)
-)
+
 m
 #sort by row instead of column
 m2 <- matrix(data=1:6, nrow=2, ncol=3, byrow=T)

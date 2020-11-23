@@ -37,7 +37,7 @@ class(movies$Runtime)
 #change from "factor" to string
 runtimes <- as.character(movies$Runtime)
 
-#eliminate the "min"
+#eliminate the unit measurement (min)
 runtimes <- sub(" min", "", runtimes)
 head(runtimes)
 
