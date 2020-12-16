@@ -25,7 +25,6 @@ f<- function(x) {x + 1}
 f(2)
 
 #create a vector (1D array of elements with the same data type)
-#c() is a concat function (?)
 v <- c(1, 2, 3);
 v
 
