@@ -1,5 +1,5 @@
 # Data_Science
-Files for Data Science Coursework
+Files for Data Science Course. This was the bulk of my coursework, and most of these files are notes taken from different online courses and tutorials. As I continue to self-study, I will add more independent projects. I have included links to some of the more interesting projects below.
 
 ### Description
 ##### Languages used:
